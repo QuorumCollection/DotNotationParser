@@ -1,0 +1,23 @@
+{
+	"name": "quorum/dot-notation",
+	"description": "Simple PHP Dot Notation Parser",
+	"type": "library",
+	"require": {
+		"php": ">=7.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "7.*"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jesse Donat",
+			"email": "donatj@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Quorum\\DotNotation\\": "src/"
+		}
+	}
+}
