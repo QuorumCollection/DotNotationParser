@@ -1,0 +1,23 @@
+<mddoc>
+	<docpage target="README.md" autoloader="psr0" autoloader-root="src">
+		<section title="Dot Notation Parser">
+			<badge-poser type="version" />
+			<badge-poser type="downloads" />
+			<badge-poser type="license" />
+			<badge-travis name="QuorumCollection/DotNotationParser" />
+			<text><![CDATA[
+DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
+
+]]></text>
+			<section title="Requirements">
+				<composer-requires/>
+			</section>
+			<section title="Installing">
+				<composer-install/>
+			</section>
+			<section title="Documentation">
+				<file name="src/DotNotationParser.php" />
+			</section>
+		</section>
+	</docpage>
+</mddoc>
