@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/quorum/dot-notation/version)](https://packagist.org/packages/quorum/dot-notation)
 [![Total Downloads](https://poser.pugx.org/quorum/dot-notation/downloads)](https://packagist.org/packages/quorum/dot-notation)
 [![License](https://poser.pugx.org/quorum/dot-notation/license)](https://packagist.org/packages/quorum/dot-notation)
-[![Build Status](https://travis-ci.org/QuorumCollection/DotNotationParser.svg?branch=master)](https://travis-ci.org/QuorumCollection/DotNotationParser)
+[![Build Status](https://github.com/CorpusPHP/Di/workflows/CI/badge.svg?)](https://github.com/CorpusPHP/Di/actions?query=workflow%3ACI)
 
 
 DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
@@ -28,15 +28,15 @@ composer require 'quorum/dot-notation'
 
 Class DotPathParser
 
+Parse strings like foo."bar.baz".quux into [ 'foo', 'bar.baz', 'quux' ]
+
 #### Method: DotNotationParser->parse
 
 ```php
 function parse(string $path) : array
 ```
 
-##### Parameters:
-
-- ***string*** `$path`
+Parse a given dot notation path into it's parts
 
 ##### Returns:
 

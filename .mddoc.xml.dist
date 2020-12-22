@@ -1,10 +1,10 @@
 <mddoc>
-	<docpage target="README.md" autoloader="psr0" autoloader-root="src">
+	<docpage target="README.md">
 		<section title="Dot Notation Parser">
-			<badge-poser type="version" />
-			<badge-poser type="downloads" />
-			<badge-poser type="license" />
-			<badge-travis name="QuorumCollection/DotNotationParser" />
+			<badge-poser type="version"/>
+			<badge-poser type="downloads"/>
+			<badge-poser type="license"/>
+			<badge-github-action name="CorpusPHP/Di" workflow="CI"/>
 			<text><![CDATA[
 DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
 
@@ -16,7 +16,7 @@ DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo'
 				<composer-install/>
 			</section>
 			<section title="Documentation">
-				<file name="src/DotNotationParser.php" />
+				<file name="src/DotNotationParser.php"/>
 			</section>
 		</section>
 	</docpage>

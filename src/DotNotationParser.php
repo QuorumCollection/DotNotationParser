@@ -12,6 +12,8 @@ use Quorum\DotNotation\Exceptions\ParseException;
 class DotNotationParser {
 
 	/**
+	 * Parse a given dot notation path into it's parts
+	 *
 	 * @return string[]
 	 */
 	public function parse( string $path ) : array {
