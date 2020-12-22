@@ -12,14 +12,13 @@ use Quorum\DotNotation\Exceptions\ParseException;
 class DotNotationParser {
 
 	/**
-	 * @param string $path
 	 * @return string[]
 	 */
 	public function parse( string $path ) : array {
 		$out   = [];
 		$chars = preg_split('/(?<!^)(?!$)/u', $path, -1, PREG_SPLIT_NO_EMPTY) ?: [];
 
-		for( ; ; ) {
+		for(;;) {
 			$token = current($chars);
 			if( $token === false ) {
 				break;
@@ -49,7 +48,7 @@ class DotNotationParser {
 	 */
 	private function scanString( array &$chars ) : string {
 		$buff = '';
-		for( ; ; ) {
+		for(;;) {
 			$token = current($chars);
 			if( $token === false || $token === '.' ) {
 				next($chars);
@@ -71,7 +70,7 @@ class DotNotationParser {
 		$buff = '';
 
 		next($chars);
-		for( ; ; ) {
+		for(;;) {
 			$token = current($chars);
 			if( $token === false ) {
 				throw new ParseException(
@@ -80,6 +79,7 @@ class DotNotationParser {
 					ParseException::CODE_UNEXPECTED_EOF
 				);
 			}
+
 			if( $token === '"' ) {
 				$next = next($chars);
 				if( $next === false || $next === '.' ) {

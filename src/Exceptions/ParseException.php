@@ -9,7 +9,7 @@ class ParseException extends \InvalidArgumentException {
 
 	private $charIndex;
 
-	public function __construct( $message, int $charIndex, $code, \Throwable $previous = null ) {
+	public function __construct( $message, int $charIndex, $code, ?\Throwable $previous = null ) {
 		parent::__construct($message, $code, $previous);
 
 		$this->charIndex = $charIndex;

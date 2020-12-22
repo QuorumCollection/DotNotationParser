@@ -9,7 +9,6 @@ class DotNotationParserTest extends TestCase {
 
 	/**
 	 * @dataProvider parseProvider
-	 * @param string   $path
 	 * @param string[] $result
 	 */
 	public function testParse( string $path, array $result ) : void {
@@ -23,9 +22,13 @@ class DotNotationParserTest extends TestCase {
 
 	public function parseProvider() : \Generator {
 		yield [ 'foo.bar.baz', [ 'foo', 'bar', 'baz' ] ];
+
 		yield [ 'foo."bar.baz"', [ 'foo', 'bar.baz' ] ];
+
 		yield [ 'foo.bar"baz".2', [ 'foo', 'bar"baz"', '2' ] ];
+
 		yield [ 'foo.bar.baz.', [ 'foo', 'bar', 'baz' ] ];
+
 		yield [ '日.本.語', [ '日', '本', '語' ] ];
 	}
 
@@ -47,8 +50,12 @@ class DotNotationParserTest extends TestCase {
 
 	public function unexpectedCharacterProvider() : \Generator {
 		yield [ 'foo."bar', 8 ];
+
 		yield [ 'a.foo."bar"baz', 11 ];
+
 		yield [ '.foo', 0 ];
+
 		yield [ '.', 0 ];
 	}
+
 }
