@@ -22,5 +22,10 @@
 		"psr-4": {
 			"Quorum\\DotNotation\\": "src/"
 		}
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	}
 }
