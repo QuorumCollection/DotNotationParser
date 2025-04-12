@@ -83,7 +83,7 @@ class DotNotationParser {
 
 		$chars->next();
 		$lastKey = $chars->key();
-		for( ; ; ) {
+		for(;;) {
 			$token = $chars->current();
 			$key   = $chars->key();
 
