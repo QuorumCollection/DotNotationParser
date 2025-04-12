@@ -14,6 +14,18 @@ class DotNotationParser {
 	/**
 	 * Parse a given dot notation path into it's parts
 	 *
+	 * The path is expected to be a string of dot separated keys, where keys can be
+	 * quoted with double quotes. Backslashes are used to escape double quotes inside
+	 * quoted keys.
+	 *
+	 * Examples:
+	 *
+	 * - `'foo.bar.baz'` => `[ 'foo', 'bar', 'baz' ]`
+	 * - `'foo."bar.baz"'` => `[ 'foo', 'bar.baz' ]`
+	 * - `'foo."bar.baz".quux'` => `[ 'foo', 'bar.baz', 'quux' ]`
+	 * - `'foo."bar\"baz".quux'` => `[ 'foo', 'bar"baz', 'quux' ]`
+	 *
+	 * @throws ParseException
 	 * @return string[]
 	 */
 	public function parse( string $path ) : array {
@@ -70,7 +82,7 @@ class DotNotationParser {
 		$buff = '';
 
 		$chars->next();
-		$lastKey = 0;
+		$lastKey = $chars->key();
 		for( ; ; ) {
 			$token = $chars->current();
 			$key   = $chars->key();
@@ -98,6 +110,16 @@ class DotNotationParser {
 					$nextKey ?? $key,
 					ParseException::CODE_UNEXPECTED_CHARACTER
 				);
+			}
+
+			if( $token === '\\' ) {
+				$chars->next();
+				$token = $chars->current();
+				$key   = $chars->key();
+
+				if( !$chars->valid() ) {
+					continue;
+				}
 			}
 
 			$buff .= $token;
