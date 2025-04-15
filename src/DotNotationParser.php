@@ -18,19 +18,17 @@ class DotNotationParser {
 	 */
 	public function parse( string $path ) : array {
 		$out   = [];
-		$chars = preg_split('/(?<!^)(?!$)/u', $path, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+		$chars = $this->iterateGraphemes($path);
 
-		for(;;) {
-			$token = current($chars);
-			if( $token === false ) {
-				break;
-			}
+		while( $chars->valid() ) {
+			$token = $chars->current();
+			$key   = $chars->key();
 
 			switch( $token ) {
 				case '.':
 					throw new ParseException(
-						sprintf('failed to parse path, expected string, got "%s" at %d', $token, key($chars)),
-						key($chars),
+						sprintf('failed to parse path, expected string, got "%s" at %d', $token, $key),
+						$key,
 						ParseException::CODE_UNEXPECTED_CHARACTER
 					);
 				case '"':
@@ -46,61 +44,87 @@ class DotNotationParser {
 	}
 
 	/**
-	 * @param string[] $chars array of unicode characters by reference
+	 * @param \Iterator<int,string> $chars Generator of Unicode characters
 	 */
-	private function scanString( array &$chars ) : string {
+	private function scanString( \Iterator $chars ) : string {
 		$buff = '';
-		for(;;) {
-			$token = current($chars);
-			if( $token === false || $token === '.' ) {
-				next($chars);
+		while( $chars->valid() ) {
+			$token = $chars->current();
 
+			if( $token === '.' ) {
+				$chars->next();
 				break;
 			}
 
 			$buff .= $token;
-			next($chars);
+			$chars->next();
 		}
 
 		return $buff;
 	}
 
 	/**
-	 * @param string[] $chars array of unicode characters by reference
+	 * @param \Iterator<int,string> $chars array of Unicode characters by reference
 	 */
-	private function scanQuotedString( array &$chars ) : string {
+	private function scanQuotedString( \Iterator $chars ) : string {
 		$buff = '';
 
-		next($chars);
-		for(;;) {
-			$token = current($chars);
-			if( $token === false ) {
+		$chars->next();
+		$lastKey = 0;
+		for( ; ; ) {
+			$token = $chars->current();
+			$key   = $chars->key();
+
+			if( !$chars->valid() ) {
 				throw new ParseException(
 					'failed to parse path, expected ", got EOF',
-					key($chars) ?: count($chars),
+					$key ?? ($lastKey + 1),
 					ParseException::CODE_UNEXPECTED_EOF
 				);
 			}
 
 			if( $token === '"' ) {
-				$next = next($chars);
-				if( $next === false || $next === '.' ) {
-					next($chars);
+				$chars->next();
+				$next    = $chars->current();
+				$nextKey = $chars->key();
+
+				if( !$chars->valid() || $next === '.' ) {
+					$chars->next();
 					break;
 				}
 
 				throw new ParseException(
-					sprintf('failed to parse path, expected . or EOF, got "%s" at %d', $next, key($chars)),
-					key($chars),
+					sprintf('failed to parse path, expected . or EOF, got "%s" at %d', $next, $key),
+					$nextKey ?? $key,
 					ParseException::CODE_UNEXPECTED_CHARACTER
 				);
 			}
 
 			$buff .= $token;
-			next($chars);
+
+			$lastKey = $key;
+			$chars->next();
 		}
 
 		return $buff;
+	}
+
+	/**
+	 * Yields each grapheme (user‑visible “character”) from $s.
+	 *
+	 * @return \Generator<int,string>
+	 */
+	private function iterateGraphemes( string $s ) : \Generator {
+		$off = 0;
+		$len = strlen($s);
+
+		while( $off < $len && preg_match('/\X/u', $s, $m, 0, $off) ) {
+			$g = $m[0];              // one grapheme cluster, UTF‑8 safe
+
+			yield $off => $g;
+
+			$off += strlen($g);  // advance by its byte length
+		}
 	}
 
 }
