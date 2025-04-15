@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/quorum/dot-notation/version)](https://packagist.org/packages/quorum/dot-notation)
 [![Total Downloads](https://poser.pugx.org/quorum/dot-notation/downloads)](https://packagist.org/packages/quorum/dot-notation)
 [![License](https://poser.pugx.org/quorum/dot-notation/license)](https://packagist.org/packages/quorum/dot-notation)
-[![Build Status](https://github.com/CorpusPHP/Di/workflows/CI/badge.svg?)](https://github.com/CorpusPHP/Di/actions?query=workflow%3ACI)
+[![ci.yml](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml/badge.svg)](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml)
 
 
 DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
@@ -24,7 +24,7 @@ composer require 'quorum/dot-notation'
 
 ## Documentation
 
-### Class: \Quorum\DotNotation\DotNotationParser
+### Class: Quorum\DotNotation\DotNotationParser
 
 Class DotPathParser
 
