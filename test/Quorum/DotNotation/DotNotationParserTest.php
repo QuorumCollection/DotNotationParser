@@ -20,16 +20,17 @@ class DotNotationParserTest extends TestCase {
 		);
 	}
 
-	public function parseProvider() : \Generator {
-		yield [ 'foo.bar.baz', [ 'foo', 'bar', 'baz' ] ];
-
-		yield [ 'foo."bar.baz"', [ 'foo', 'bar.baz' ] ];
-
-		yield [ 'foo.bar"baz".2', [ 'foo', 'bar"baz"', '2' ] ];
-
-		yield [ 'foo.bar.baz.', [ 'foo', 'bar', 'baz' ] ];
-
-		yield [ '日.本.語', [ '日', '本', '語' ] ];
+	public static function parseProvider() : array {
+		return [
+			[ '', [] ],
+			[ 'foo.bar.baz', [ 'foo', 'bar', 'baz' ] ],
+			[ 'foo."bar.baz"', [ 'foo', 'bar.baz' ] ],
+			[ 'foo.bar"baz".2', [ 'foo', 'bar"baz"', '2' ] ],
+			[ 'foo.bar.baz.', [ 'foo', 'bar', 'baz' ] ],
+			[ '日.本.語', [ '日', '本', '語' ] ],
+			[ 'foo."bar\\"baz".quux', [ 'foo', 'bar"baz', 'quux' ] ],
+			[ 'foo."bar\\\\baz".quux.', [ 'foo', 'bar\\baz', 'quux' ] ],
+		];
 	}
 
 	/**
@@ -48,14 +49,17 @@ class DotNotationParserTest extends TestCase {
 		$this->fail(sprintf('"%s" failed to throw exception', $path));
 	}
 
-	public function unexpectedCharacterProvider() : \Generator {
-		yield [ 'foo."bar', 8 ];
-
-		yield [ 'a.foo."bar"baz', 11 ];
-
-		yield [ '.foo', 0 ];
-
-		yield [ '.', 0 ];
+	public static function unexpectedCharacterProvider() : array {
+		return [
+			[ 'foo."bar', 8 ],
+			[ 'a.foo."bar"baz', 11 ],
+			[ '.foo', 0 ],
+			[ '.', 0 ],
+			[ 'foo."👨‍👩‍👧‍👦"."broke', 38 ],
+			[ 'a..', 2 ],
+			[ 'a..b', 2 ],
+			[ 'a."\\', 4 ],
+		];
 	}
 
 }
