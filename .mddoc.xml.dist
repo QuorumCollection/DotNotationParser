@@ -15,6 +15,10 @@ DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo'
 			<section title="Installing">
 				<composer-install/>
 			</section>
+			<section title="Example">
+				<source name="example/example.php" lang="php"/>
+				<exec cmd="php example/example.php"  format="code-block"/>
+			</section>
 			<section title="Documentation">
 				<file name="src/DotNotationParser.php"/>
 			</section>
