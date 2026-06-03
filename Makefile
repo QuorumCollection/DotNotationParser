@@ -7,8 +7,12 @@ README.md: $(SRC_FILES)
 fix: cbf
 	vendor/bin/php-cs-fixer fix
 
+.PHONY: phpstan
+phpstan:
+	vendor/bin/phpstan --memory-limit=2G
+
 .PHONY: test
-test: cs
+test: cs phpstan
 	vendor/bin/phpunit
 
 .PHONY: cs

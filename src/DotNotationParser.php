@@ -82,9 +82,11 @@ class DotNotationParser {
 		$buff = '';
 
 		$chars->next();
+		/** @var int|null $lastKey */
 		$lastKey = $chars->key();
 		for(;;) {
 			$token = $chars->current();
+			/** @var int|null $key */
 			$key   = $chars->key();
 
 			if( !$chars->valid() ) {
@@ -98,6 +100,7 @@ class DotNotationParser {
 			if( $token === '"' ) {
 				$chars->next();
 				$next    = $chars->current();
+				/** @var int|null $nextKey */
 				$nextKey = $chars->key();
 
 				if( !$chars->valid() || $next === '.' ) {
@@ -107,7 +110,7 @@ class DotNotationParser {
 
 				throw new ParseException(
 					sprintf('failed to parse path, expected . or EOF, got "%s" at %d', $next, $key),
-					$nextKey ?? $key,
+					$nextKey ?? $key ?? ($lastKey + 1),
 					ParseException::CODE_UNEXPECTED_CHARACTER
 				);
 			}
