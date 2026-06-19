@@ -104,7 +104,7 @@ return (new PhpCsFixer\Config)
 			],
 
 			'blank_line_before_statement' => [
-				'statements' => [ 'continue', 'try', 'switch', 'exit', 'throw', 'return', 'do' ],
+				'statements' => [ 'continue', 'try', 'switch', 'die', 'exit', 'throw', 'return', 'yield', 'do' ],
 			],
 
 			'no_superfluous_phpdoc_tags' => [
@@ -139,7 +139,7 @@ return (new PhpCsFixer\Config)
 
 			'method_chaining_indentation' => true,
 			'method_argument_space'       => [
-				'on_multiline' => 'ignore', // at least until they fix it
+				'on_multiline' => 'ignore',
 				'keep_multiple_spaces_after_comma' => true,
 			],
 
@@ -168,4 +168,3 @@ return (new PhpCsFixer\Config)
 		]
 	)
 	->setFinder($finder);
-
