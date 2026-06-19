@@ -4,10 +4,11 @@ $finder = PhpCsFixer\Finder::create()
 	->files()
 	->in(__DIR__ . '/src')
 	->in(__DIR__ . '/test')
+	->in(__DIR__ . '/example')
 	->name('*.php');
 
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config)
 	->setUsingCache(true)
 	->setIndent("\t")
 	->setLineEnding("\n")
@@ -103,7 +104,7 @@ return PhpCsFixer\Config::create()
 			],
 
 			'blank_line_before_statement' => [
-				'statements' => [ 'continue', 'try', 'switch', 'die', 'exit', 'throw', 'return', 'yield', 'do' ],
+				'statements' => [ 'continue', 'try', 'switch', 'exit', 'throw', 'return', 'do' ],
 			],
 
 			'no_superfluous_phpdoc_tags' => [
@@ -112,8 +113,6 @@ return PhpCsFixer\Config::create()
 			'no_superfluous_elseif'      => true,
 
 			'no_useless_else' => true,
-
-			'compact_nullable_typehint' => true,
 
 			'combine_consecutive_issets'  => true,
 			'escape_implicit_backslashes' => true,
@@ -140,6 +139,7 @@ return PhpCsFixer\Config::create()
 
 			'method_chaining_indentation' => true,
 			'method_argument_space'       => [
+				'on_multiline' => 'ignore', // at least until they fix it
 				'keep_multiple_spaces_after_comma' => true,
 			],
 
@@ -156,10 +156,16 @@ return PhpCsFixer\Config::create()
 				'import_functions' => false,
 			],
 
-			'trailing_comma_in_multiline_array' => true,
+			'trailing_comma_in_multiline' => true,
 			'single_line_comment_style' => true,
+
+			'is_null' => true,
+			'yoda_style' => [
+				'equal' => false,
+				'identical' => false,
+				'less_and_greater' => null,
+			],
 		]
 	)
 	->setFinder($finder);
-
 
