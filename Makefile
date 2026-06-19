@@ -11,8 +11,12 @@ fix: cbf
 phpstan:
 	vendor/bin/phpstan --memory-limit=2G
 
+.PHONY: php-cs-fixer
+php-cs-fixer:
+	vendor/bin/php-cs-fixer fix --dry-run --diff
+
 .PHONY: test
-test: cs phpstan
+test: cs php-cs-fixer phpstan
 	vendor/bin/phpunit
 
 .PHONY: cs
