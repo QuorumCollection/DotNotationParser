@@ -104,7 +104,7 @@ return (new PhpCsFixer\Config)
 			],
 
 			'blank_line_before_statement' => [
-				'statements' => [ 'continue', 'try', 'switch', 'die', 'exit', 'throw', 'return', 'yield', 'do' ],
+				'statements' => [ 'continue', 'try', 'switch', 'exit', 'throw', 'return', 'yield', 'do' ],
 			],
 
 			'no_superfluous_phpdoc_tags' => [
