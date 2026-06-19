@@ -163,7 +163,6 @@ return (new PhpCsFixer\Config)
 			'yoda_style' => [
 				'equal' => false,
 				'identical' => false,
-				'less_and_greater' => null,
 			],
 		]
 	)
