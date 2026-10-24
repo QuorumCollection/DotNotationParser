@@ -7,7 +7,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/QuorumCollection/DotNotationParser/badge.svg)](https://coveralls.io/github/QuorumCollection/DotNotationParser)
 
 
-DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
+DotNotationParser turns dot-delimited paths into an ordered list of keys. Use it when configuration, request parameters, or nested data need a compact path syntax. For example, `account.profile.name` becomes `[ 'account', 'profile', 'name' ]`.
+
+Keys may contain dots when wrapped in double quotes. Escape a literal double quote with a backslash. The parser reports invalid paths with the character offset that caused the error, so callers can return useful feedback.
 
 
 
