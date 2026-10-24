@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Quorum\DotNotation\Exceptions;
 
 class ParseException extends \InvalidArgumentException {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Quorum\DotNotation;
 
 use Quorum\DotNotation\Exceptions\ParseException;
