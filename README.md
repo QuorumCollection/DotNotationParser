@@ -85,7 +85,7 @@ Parse strings like foo."bar.baz".quux into [ 'foo', 'bar.baz', 'quux' ]
 #### Method: DotNotationParser->parse
 
 ```php
-function parse(string $path) : array
+function parse(string $path): array
 ```
 
 Parse a given dot notation path into it's parts  
@@ -103,6 +103,6 @@ quoted keys.
 
 **Throws**: `\Quorum\DotNotation\Exceptions\ParseException`
 
-##### Returns:
+##### Return Value
 
 - ***list<string>***
