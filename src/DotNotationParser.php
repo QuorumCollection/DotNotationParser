@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Quorum\DotNotation;
 
 use Quorum\DotNotation\Exceptions\ParseException;
@@ -26,7 +28,7 @@ class DotNotationParser {
 	 * - `'foo."bar\"baz".quux'` => `[ 'foo', 'bar"baz', 'quux' ]`
 	 *
 	 * @throws ParseException
-	 * @return string[]
+	 * @return list<string>
 	 */
 	public function parse( string $path ) : array {
 		$out   = [];

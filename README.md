@@ -12,7 +12,7 @@ DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo'
 
 ## Requirements
 
-- **php**: >=7.4
+- **php**: >=8.2
 
 ## Installing
 
@@ -105,4 +105,4 @@ quoted keys.
 
 ##### Returns:
 
-- ***string[]***
+- ***list<string>***

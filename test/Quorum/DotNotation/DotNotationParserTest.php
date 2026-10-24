@@ -1,16 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Quorum\DotNotation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Quorum\DotNotation\Exceptions\ParseException;
 
 class DotNotationParserTest extends TestCase {
 
-	/**
-	 * @dataProvider parseProvider
-	 * @param string[] $result
-	 */
+	#[DataProvider('parseProvider')]
 	public function testParse( string $path, array $result ) : void {
 		$parser = new DotNotationParser;
 
@@ -20,6 +20,9 @@ class DotNotationParserTest extends TestCase {
 		);
 	}
 
+	/**
+	 * @return list<array{string, list<string>}>
+	 */
 	public static function parseProvider() : array {
 		return [
 			[ '', [] ],
@@ -33,9 +36,7 @@ class DotNotationParserTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider unexpectedCharacterProvider
-	 */
+	#[DataProvider('unexpectedCharacterProvider')]
 	public function testUnexpectedCharacters( string $path, int $pos ) : void {
 		try {
 			$parser = new DotNotationParser;
@@ -49,6 +50,9 @@ class DotNotationParserTest extends TestCase {
 		$this->fail(sprintf('"%s" failed to throw exception', $path));
 	}
 
+	/**
+	 * @return list<array{string, int}>
+	 */
 	public static function unexpectedCharacterProvider() : array {
 		return [
 			[ 'foo."bar', 8 ],
