@@ -1,10 +1,9 @@
 <?php
 
-namespace Quorum\DotNotation\Test;
+namespace Quorum\DotNotation;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Quorum\DotNotation\DotNotationParser;
 use Quorum\DotNotation\Exceptions\ParseException;
 
 class DotNotationParserTest extends TestCase {
