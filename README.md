@@ -4,15 +4,18 @@
 [![Total Downloads](https://poser.pugx.org/quorum/dot-notation/downloads)](https://packagist.org/packages/quorum/dot-notation)
 [![License](https://poser.pugx.org/quorum/dot-notation/license)](https://packagist.org/packages/quorum/dot-notation)
 [![ci.yml](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml/badge.svg)](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/QuorumCollection/DotNotationParser/badge.svg)](https://coveralls.io/github/QuorumCollection/DotNotationParser)
 
 
-DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
+DotNotationParser turns dot-delimited paths into an ordered list of keys. Use it when configuration, request parameters, or nested data need a compact path syntax. For example, `account.profile.name` becomes `[ 'account', 'profile', 'name' ]`.
+
+Keys may contain dots when wrapped in double quotes. Escape a literal double quote with a backslash. The parser reports invalid paths with the character offset that caused the error, so callers can return useful feedback.
 
 
 
 ## Requirements
 
-- **php**: >=7.4
+- **php**: >=8.2
 
 ## Installing
 
@@ -85,7 +88,7 @@ Parse strings like foo."bar.baz".quux into [ 'foo', 'bar.baz', 'quux' ]
 #### Method: DotNotationParser->parse
 
 ```php
-function parse(string $path) : array
+function parse(string $path): array
 ```
 
 Parse a given dot notation path into it's parts  
@@ -103,6 +106,6 @@ quoted keys.
 
 **Throws**: `\Quorum\DotNotation\Exceptions\ParseException`
 
-##### Returns:
+##### Return Value
 
-- ***string[]***
+- ***list<string>***

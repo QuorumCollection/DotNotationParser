@@ -2,25 +2,29 @@
 
 namespace Quorum\DotNotation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Quorum\DotNotation\Exceptions\ParseException;
 
 class DotNotationParserTest extends TestCase {
 
 	/**
-	 * @dataProvider parseProvider
-	 * @param string[] $result
+	 * @param list<string> $result
 	 */
-	public function testParse( string $path, array $result ) : void {
+	#[DataProvider('parseProvider')]
+	public function testParse( string $path, array $result ): void {
 		$parser = new DotNotationParser;
 
 		$this->assertSame(
 			$result,
-			$parser->parse($path)
+			$parser->parse($path),
 		);
 	}
 
-	public static function parseProvider() : array {
+	/**
+	 * @return list<array{string, list<string>}>
+	 */
+	public static function parseProvider(): array {
 		return [
 			[ '', [] ],
 			[ 'foo.bar.baz', [ 'foo', 'bar', 'baz' ] ],
@@ -28,15 +32,13 @@ class DotNotationParserTest extends TestCase {
 			[ 'foo.bar"baz".2', [ 'foo', 'bar"baz"', '2' ] ],
 			[ 'foo.bar.baz.', [ 'foo', 'bar', 'baz' ] ],
 			[ '日.本.語', [ '日', '本', '語' ] ],
-			[ 'foo."bar\\"baz".quux', [ 'foo', 'bar"baz', 'quux' ] ],
-			[ 'foo."bar\\\\baz".quux.', [ 'foo', 'bar\\baz', 'quux' ] ],
+			[ 'foo."bar\"baz".quux', [ 'foo', 'bar"baz', 'quux' ] ],
+			[ 'foo."bar\\\baz".quux.', [ 'foo', 'bar\baz', 'quux' ] ],
 		];
 	}
 
-	/**
-	 * @dataProvider unexpectedCharacterProvider
-	 */
-	public function testUnexpectedCharacters( string $path, int $pos ) : void {
+	#[DataProvider('unexpectedCharacterProvider')]
+	public function testUnexpectedCharacters( string $path, int $pos ): void {
 		try {
 			$parser = new DotNotationParser;
 			$parser->parse($path);
@@ -49,7 +51,10 @@ class DotNotationParserTest extends TestCase {
 		$this->fail(sprintf('"%s" failed to throw exception', $path));
 	}
 
-	public static function unexpectedCharacterProvider() : array {
+	/**
+	 * @return list<array{string, int}>
+	 */
+	public static function unexpectedCharacterProvider(): array {
 		return [
 			[ 'foo."bar', 8 ],
 			[ 'a.foo."bar"baz', 11 ],

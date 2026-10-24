@@ -26,9 +26,9 @@ class DotNotationParser {
 	 * - `'foo."bar\"baz".quux'` => `[ 'foo', 'bar"baz', 'quux' ]`
 	 *
 	 * @throws ParseException
-	 * @return string[]
+	 * @return list<string>
 	 */
-	public function parse( string $path ) : array {
+	public function parse( string $path ): array {
 		$out   = [];
 		$chars = $this->iterateGraphemes($path);
 
@@ -41,7 +41,7 @@ class DotNotationParser {
 					throw new ParseException(
 						sprintf('failed to parse path, expected string, got "%s" at %d', $token, $key),
 						$key,
-						ParseException::CODE_UNEXPECTED_CHARACTER
+						ParseException::CODE_UNEXPECTED_CHARACTER,
 					);
 				case '"':
 					$out[] = $this->scanQuotedString($chars);
@@ -58,7 +58,7 @@ class DotNotationParser {
 	/**
 	 * @param \Iterator<int,string> $chars Generator of Unicode characters
 	 */
-	private function scanString( \Iterator $chars ) : string {
+	private function scanString( \Iterator $chars ): string {
 		$buff = '';
 		while( $chars->valid() ) {
 			$token = $chars->current();
@@ -78,7 +78,7 @@ class DotNotationParser {
 	/**
 	 * @param \Iterator<int,string> $chars array of Unicode characters by reference
 	 */
-	private function scanQuotedString( \Iterator $chars ) : string {
+	private function scanQuotedString( \Iterator $chars ): string {
 		$buff = '';
 
 		$chars->next();
@@ -93,7 +93,7 @@ class DotNotationParser {
 				throw new ParseException(
 					'failed to parse path, expected ", got EOF',
 					$key ?? ($lastKey + 1),
-					ParseException::CODE_UNEXPECTED_EOF
+					ParseException::CODE_UNEXPECTED_EOF,
 				);
 			}
 
@@ -111,7 +111,7 @@ class DotNotationParser {
 				throw new ParseException(
 					sprintf('failed to parse path, expected . or EOF, got "%s" at %d', $next, $key),
 					$nextKey ?? $key ?? ($lastKey + 1),
-					ParseException::CODE_UNEXPECTED_CHARACTER
+					ParseException::CODE_UNEXPECTED_CHARACTER,
 				);
 			}
 
@@ -139,7 +139,7 @@ class DotNotationParser {
 	 *
 	 * @return \Generator<int,string>
 	 */
-	private function iterateGraphemes( string $s ) : \Generator {
+	private function iterateGraphemes( string $s ): \Generator {
 		$off = 0;
 		$len = strlen($s);
 
