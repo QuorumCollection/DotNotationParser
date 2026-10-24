@@ -11,19 +11,19 @@ use Quorum\DotNotation\Exceptions\ParseException;
 class DotNotationParserTest extends TestCase {
 
 	#[DataProvider('parseProvider')]
-	public function testParse( string $path, array $result ) : void {
+	public function testParse( string $path, array $result ): void {
 		$parser = new DotNotationParser;
 
 		$this->assertSame(
 			$result,
-			$parser->parse($path)
+			$parser->parse($path),
 		);
 	}
 
 	/**
 	 * @return list<array{string, list<string>}>
 	 */
-	public static function parseProvider() : array {
+	public static function parseProvider(): array {
 		return [
 			[ '', [] ],
 			[ 'foo.bar.baz', [ 'foo', 'bar', 'baz' ] ],
@@ -31,13 +31,13 @@ class DotNotationParserTest extends TestCase {
 			[ 'foo.bar"baz".2', [ 'foo', 'bar"baz"', '2' ] ],
 			[ 'foo.bar.baz.', [ 'foo', 'bar', 'baz' ] ],
 			[ '日.本.語', [ '日', '本', '語' ] ],
-			[ 'foo."bar\\"baz".quux', [ 'foo', 'bar"baz', 'quux' ] ],
-			[ 'foo."bar\\\\baz".quux.', [ 'foo', 'bar\\baz', 'quux' ] ],
+			[ 'foo."bar\"baz".quux', [ 'foo', 'bar"baz', 'quux' ] ],
+			[ 'foo."bar\\\baz".quux.', [ 'foo', 'bar\baz', 'quux' ] ],
 		];
 	}
 
 	#[DataProvider('unexpectedCharacterProvider')]
-	public function testUnexpectedCharacters( string $path, int $pos ) : void {
+	public function testUnexpectedCharacters( string $path, int $pos ): void {
 		try {
 			$parser = new DotNotationParser;
 			$parser->parse($path);
@@ -53,7 +53,7 @@ class DotNotationParserTest extends TestCase {
 	/**
 	 * @return list<array{string, int}>
 	 */
-	public static function unexpectedCharacterProvider() : array {
+	public static function unexpectedCharacterProvider(): array {
 		return [
 			[ 'foo."bar', 8 ],
 			[ 'a.foo."bar"baz', 11 ],

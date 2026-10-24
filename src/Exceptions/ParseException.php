@@ -13,12 +13,12 @@ class ParseException extends \InvalidArgumentException {
 		string $message,
 		private readonly int $charIndex,
 		int $code,
-		?\Throwable $previous = null
+		?\Throwable $previous = null,
 	) {
 		parent::__construct($message, $code, $previous);
 	}
 
-	public function getCharIndex() : int {
+	public function getCharIndex(): int {
 		return $this->charIndex;
 	}
 
