@@ -1,13 +1,17 @@
 <?php
 
-namespace Quorum\DotNotation;
+namespace Quorum\DotNotation\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Quorum\DotNotation\DotNotationParser;
 use Quorum\DotNotation\Exceptions\ParseException;
 
 class DotNotationParserTest extends TestCase {
 
+	/**
+	 * @param list<string> $result
+	 */
 	#[DataProvider('parseProvider')]
 	public function testParse( string $path, array $result ): void {
 		$parser = new DotNotationParser;

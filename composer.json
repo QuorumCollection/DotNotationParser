@@ -31,6 +31,11 @@
 			"Quorum\\DotNotation\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Quorum\\DotNotation\\Test\\": "test/"
+		}
+	},
 	"config": {
 		"sort-packages": true,
 		"allow-plugins": {
