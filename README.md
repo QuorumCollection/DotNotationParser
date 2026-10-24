@@ -4,6 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/quorum/dot-notation/downloads)](https://packagist.org/packages/quorum/dot-notation)
 [![License](https://poser.pugx.org/quorum/dot-notation/license)](https://packagist.org/packages/quorum/dot-notation)
 [![ci.yml](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml/badge.svg)](https://github.com/QuorumCollection/DotNotationParser/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/QuorumCollection/DotNotationParser/badge.svg)](https://coveralls.io/github/QuorumCollection/DotNotationParser)
 
 
 DotNotationParser is a simple parser that will parse `foo.bar.baz` into `[ 'foo', 'bar', 'baz' ]` and `foo."bar.baz"` into `[ 'foo', 'bar.baz' ]`.
