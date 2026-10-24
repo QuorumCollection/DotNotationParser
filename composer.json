@@ -1,6 +1,12 @@
 {
 	"name": "quorum/dot-notation",
 	"description": "Simple PHP Dot Notation Parser",
+	"keywords": [
+		"dot notation",
+		"nested data",
+		"path parser",
+		"php"
+	],
 	"type": "library",
 	"require": {
 		"php": ">=8.2"
@@ -16,8 +22,9 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Jesse Donat",
-			"email": "donatj@gmail.com"
+			"name": "Jesse G. Donat",
+			"email": "donatj@gmail.com",
+			"role": "Developer"
 		}
 	],
 	"autoload": {
@@ -26,6 +33,7 @@
 		}
 	},
 	"config": {
+		"sort-packages": true,
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
