@@ -4,8 +4,7 @@
 	"keywords": [
 		"dot notation",
 		"nested data",
-		"path parser",
-		"php"
+		"path parser"
 	],
 	"type": "library",
 	"require": {
