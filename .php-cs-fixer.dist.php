@@ -3,7 +3,15 @@
 use Corpus\PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
-return Config::php8x2()
+$config = Config::php8x2();
+
+return $config
+	->setRules(
+		[
+			...$config->getRules(),
+			'@PHPUnit11x0Migration:risky' => true,
+		],
+	)
 	->setFinder(
 		Finder::create()
 			->files()
